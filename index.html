@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>عرض خاص</title>
+
+<style>
+body{font-family:tahoma;background:#f6e6f0;margin:0}
+.box{max-width:420px;margin:auto;background:#fff;padding:15px;border-radius:12px}
+
+.offer{
+background:#b44bb4;
+color:#fff;
+padding:12px;
+border-radius:10px;
+text-align:center;
+margin-bottom:15px;
+}
+
+.timer{
+background:#fff;
+color:#b44bb4;
+padding:6px;
+border-radius:6px;
+margin-top:8px;
+font-weight:bold;
+}
+
+.product{
+border:2px dashed #e4b7d8;
+padding:10px;
+margin-bottom:15px;
+text-align:center
+}
+
+img{max-width:100%;border-radius:10px}
+
+.qty button{
+width:40px;height:40px;font-size:20px
+}
+.qty span{
+margin:0 10px;font-size:18px
+}
+
+.summary{
+background:#f3d9f1;
+padding:10px;
+border-radius:8px;
+margin-top:10px
+}
+
+.order-btn{
+background:#b44bb4;
+color:#fff;
+border:none;
+width:100%;
+padding:12px;
+font-size:18px;
+border-radius:8px
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<!-- العرض -->
+<div class="offer">
+🌸 عرض خاص لفترة محدودة 🌸
+<div class="timer">
+الشحن مجاني لمدة <span id="time">60:00</span>
+</div>
+<div>الدفع عند الاستلام</div>
+</div>
+
+<!-- المنتج الأول -->
+<div class="product">
+<img src="images/henna.jpg">
+<h4>حنة طبيعية للشعر</h4>
+<p>299 جنيه</p>
+<div class="qty">
+<button onclick="change('henna',-1)">-</button>
+<span id="henna">0</span>
+<button onclick="change('henna',1)">+</button>
+</div>
+</div>
+
+<!-- المنتج الثاني -->
+<div class="product">
+<img src="images/course.jpg">
+<h4>كورس إطالة الشعر</h4>
+<p>849 جنيه</p>
+<div class="qty">
+<button onclick="change('course',-1)">-</button>
+<span id="course">0</span>
+<button onclick="change('course',1)">+</button>
+</div>
+</div>
+
+<!-- ملخص الطلب -->
+<div class="summary" id="summary">لم يتم اختيار منتجات بعد</div>
+
+<button class="order-btn" onclick="goOrder()">🌸 اطلبى الآن</button>
+
+</div>
+
+<script>
+/* العداد */
+let seconds = 3600;
+setInterval(()=>{
+let m = Math.floor(seconds/60);
+let s = seconds%60;
+document.getElementById('time').innerText =
+`${m}:${s<10?'0'+s:s}`;
+if(seconds>0) seconds--;
+},1000);
+
+/* الطلب */
+let order={henna:0,course:0};
+
+function change(p,v){
+order[p]=Math.max(0,order[p]+v);
+document.getElementById(p).innerText=order[p];
+update();
+}
+
+function update(){
+let txt='',total=0;
+if(order.henna){
+txt+=`حنة × ${order.henna} = ${order.henna*299}<br>`;
+total+=order.henna*299;
+}
+if(order.course){
+txt+=`كورس × ${order.course} = ${order.course*849}<br>`;
+total+=order.course*849;
+}
+if(!txt){txt='لم يتم اختيار منتجات بعد'}
+else{txt+=`<strong>الإجمالي: ${total} جنيه</strong>`}
+document.getElementById('summary').innerHTML=txt;
+localStorage.setItem('order',JSON.stringify(order));
+}
+
+function goOrder(){
+location.href='order.html';
+}
+</script>
+
+</body>
+</html>
