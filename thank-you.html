@@ -19,26 +19,23 @@ fbq('init','710372971867762');
 </script>
 
 <style>
-body{font-family:tahoma;background:#f6e6f0;margin:0}
-.box{
-max-width:420px;margin:auto;background:#fff;
-padding:20px;border-radius:12px;text-align:center
-}
+body{font-family:tahoma;background:#f6e6f0;text-align:center}
+.box{max-width:420px;margin:80px auto;background:#fff;padding:20px;border-radius:12px}
 </style>
 </head>
 
 <body>
+
 <div class="box">
-<h2>🌸 شكرًا لطلبك 🌸</h2>
-<p>تم استلام طلبك بنجاح</p>
-<p>سيتم التواصل معك قريبًا لتأكيد الطلب</p>
+<h2>🎉 تم تأكيد طلبك بنجاح</h2>
+<p>سيتم التواصل معك لتأكيد الشحن</p>
 </div>
 
 <script>
-if(!sessionStorage.getItem('purchase_done')){
-let v = localStorage.getItem('pvalue') || 0;
-fbq('track','Purchase',{value:v,currency:'EGP'});
-sessionStorage.setItem('purchase_done','1');
+let d=JSON.parse(localStorage.getItem('order_data'));
+if(d){
+fbq('track','Purchase',{value:d.total,currency:'EGP'});
+localStorage.removeItem('order_data');
 }
 </script>
 

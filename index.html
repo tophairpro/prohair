@@ -5,18 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>عرض خاص</title>
 
-<!-- Facebook Pixel -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','710372971867762');
-fbq('track','PageView');
+(function(){
+  emailjs.init("iTr8NlQ0dEyyrZzfa");
+})();
 </script>
 
 <style>
@@ -24,39 +17,70 @@ body{font-family:tahoma;background:#f6e6f0;margin:0}
 .box{max-width:420px;margin:auto;background:#fff;padding:15px;border-radius:12px}
 
 .offer{
-background:#b44bb4;color:#fff;padding:12px;border-radius:10px;
-text-align:center;margin-bottom:15px
+background:#b44bb4;
+color:#fff;
+padding:12px;
+border-radius:10px;
+text-align:center;
+margin-bottom:15px;
 }
+
 .timer{
-background:#fff;color:#b44bb4;padding:6px;border-radius:6px;
-margin-top:8px;font-weight:bold
+background:#fff;
+color:#b44bb4;
+padding:6px;
+border-radius:6px;
+margin-top:8px;
+font-weight:bold;
 }
+
 .product{
-border:2px dashed #e4b7d8;padding:10px;margin-bottom:15px;
+border:2px dashed #e4b7d8;
+padding:10px;
+margin-bottom:15px;
 text-align:center
 }
+
 img{max-width:100%;border-radius:10px}
+
 .qty button{width:40px;height:40px;font-size:20px}
 .qty span{margin:0 10px;font-size:18px}
+
 .summary{
-background:#f3d9f1;padding:10px;border-radius:8px;margin:10px 0
+background:#f3d9f1;
+padding:10px;
+border-radius:8px;
+margin-top:10px
 }
-input,select,button{
-width:100%;padding:10px;margin-bottom:10px;font-size:16px
+
+input,select{
+width:100%;
+padding:10px;
+margin-top:8px
 }
+
 .order-btn{
-background:#b44bb4;color:#fff;border:none;
-padding:12px;font-size:18px;border-radius:8px
+background:#b44bb4;
+color:#fff;
+border:none;
+width:100%;
+padding:12px;
+font-size:18px;
+border-radius:8px;
+margin-top:10px
 }
 </style>
 </head>
 
 <body>
+
 <div class="box">
 
 <div class="offer">
 🌸 عرض خاص لفترة محدودة 🌸
-<div class="timer">الشحن مجاني لمدة <span id="time">60:00</span></div>
+<div class="timer">
+الشحن مجاني لمدة <span id="time">60:00</span>
+</div>
 <div>الدفع عند الاستلام</div>
 </div>
 
@@ -84,45 +108,24 @@ padding:12px;font-size:18px;border-radius:8px
 
 <div class="summary" id="summary">لم يتم اختيار منتجات بعد</div>
 
-<form action="https://formsubmit.co/nourhannady17@gmail.com" method="POST">
-<input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_next" value="thank-you.html">
-<input type="hidden" name="ملخص_الطلب" id="orderData">
+<input id="name" placeholder="الاسم" required>
+<input id="phone" placeholder="رقم الموبايل" required>
+<input id="address" placeholder="العنوان" required>
 
-<input type="text" name="الاسم" placeholder="الاسم" required>
-<input type="text" name="الموبايل" placeholder="رقم الموبايل" required>
-<input type="text" name="العنوان" placeholder="العنوان" required>
-
-<select name="المحافظة" required>
-<option value="">اختر المحافظة</option>
-<option>القاهرة</option><option>الجيزة</option><option>الإسكندرية</option>
-<option>الدقهلية</option><option>الشرقية</option><option>الغربية</option>
-<option>المنوفية</option><option>القليوبية</option><option>البحيرة</option>
-<option>كفر الشيخ</option><option>دمياط</option><option>بورسعيد</option>
-<option>الإسماعيلية</option><option>السويس</option><option>الفيوم</option>
-<option>بني سويف</option><option>المنيا</option><option>أسيوط</option>
-<option>سوهاج</option><option>قنا</option><option>الأقصر</option>
-<option>أسوان</option><option>الوادي الجديد</option>
-<option>مطروح</option><option>شمال سيناء</option><option>جنوب سيناء</option>
-<option>البحر الأحمر</option>
-</select>
-
-<button class="order-btn" type="submit">🌸 تأكيد الطلب</button>
-</form>
+<button class="order-btn" onclick="sendOrder()">🌸 تأكيد الطلب</button>
 
 </div>
 
 <script>
-/* Timer */
 let seconds=3600;
 setInterval(()=>{
-let m=Math.floor(seconds/60),s=seconds%60;
+let m=Math.floor(seconds/60);
+let s=seconds%60;
 document.getElementById('time').innerText=`${m}:${s<10?'0'+s:s}`;
 if(seconds>0)seconds--;
 },1000);
 
-/* Order logic */
-let order={henna:0,course:0},total=0;
+let order={henna:0,course:0};
 
 function change(p,v){
 order[p]=Math.max(0,order[p]+v);
@@ -131,14 +134,25 @@ update();
 }
 
 function update(){
-let txt='';total=0;
+let txt='',total=0;
 if(order.henna){txt+=`حنة × ${order.henna} = ${order.henna*299}<br>`;total+=order.henna*299}
 if(order.course){txt+=`كورس × ${order.course} = ${order.course*849}<br>`;total+=order.course*849}
-if(!txt){txt='لم يتم اختيار منتجات بعد'}
-else{txt+=`<strong>الإجمالي: ${total} جنيه</strong>`}
+txt = txt ? txt+`<strong>الإجمالي: ${total} جنيه</strong>` : 'لم يتم اختيار منتجات بعد';
 document.getElementById('summary').innerHTML=txt;
-document.getElementById('orderData').value=txt;
-localStorage.setItem('pvalue',total);
+localStorage.setItem('order_data',JSON.stringify({order,total}));
+}
+
+function sendOrder(){
+let data=JSON.parse(localStorage.getItem('order_data'));
+emailjs.send("service_64amdzf","template_m6e6601",{
+name:document.getElementById('name').value,
+phone:document.getElementById('phone').value,
+address:document.getElementById('address').value,
+order:data.order.henna+" حنة / "+data.order.course+" كورس",
+total:data.total
+}).then(()=>{
+location.href="thank-you.html";
+});
 }
 </script>
 
