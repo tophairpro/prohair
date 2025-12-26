@@ -5,61 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>عرض خاص</title>
 
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '758230765499539');
+fbq('track', 'ViewContent');
+</script>
+<noscript>
+<img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=758230765499539&ev=PageView&noscript=1"/>
+</noscript>
+<!-- End Meta Pixel Code -->
+
 <style>
 body{font-family:tahoma;background:#f6e6f0;margin:0}
 .box{max-width:420px;margin:auto;background:#fff;padding:15px;border-radius:12px}
-
-.offer{
-background:#b44bb4;
-color:#fff;
-padding:12px;
-border-radius:10px;
-text-align:center;
-margin-bottom:15px;
-}
-
-.timer{
-background:#fff;
-color:#b44bb4;
-padding:6px;
-border-radius:6px;
-margin-top:8px;
-font-weight:bold;
-}
-
-.product{
-border:2px dashed #e4b7d8;
-padding:10px;
-margin-bottom:15px;
-text-align:center
-}
-
+.offer{background:#b44bb4;color:#fff;padding:12px;border-radius:10px;text-align:center;margin-bottom:15px}
+.timer{background:#fff;color:#b44bb4;padding:6px;border-radius:6px;margin-top:8px;font-weight:bold}
+.product{border:2px dashed #e4b7d8;padding:10px;margin-bottom:15px;text-align:center}
 img{max-width:100%;border-radius:10px}
-
-.qty button{
-width:40px;height:40px;font-size:20px
-}
-.qty span{
-margin:0 10px;font-size:18px
-}
-
-.summary{
-background:#f3d9f1;
-padding:10px;
-border-radius:8px;
-margin-top:10px
-}
-
-.order-btn{
-background:#b44bb4;
-color:#fff;
-border:none;
-width:100%;
-padding:12px;
-font-size:18px;
-border-radius:8px;
-cursor:pointer
-}
+.qty button{width:40px;height:40px;font-size:20px}
+.qty span{margin:0 10px;font-size:18px}
+.summary{background:#f3d9f1;padding:10px;border-radius:8px;margin-top:10px}
+.order-btn{background:#b44bb4;color:#fff;border:none;width:100%;padding:12px;font-size:18px;border-radius:8px}
+.problem{background:#fde9f7;padding:10px;border-radius:8px;margin-bottom:10px;font-size:14px}
 </style>
 </head>
 
@@ -75,13 +52,12 @@ cursor:pointer
 <div>الدفع عند الاستلام</div>
 </div>
 
-<!-- المنتج الأول -->
+<div class="problem">
+تعاني سيدات كثيرات من تلف الشعر، الحساسية من الصبغات الكيماوية، وتساقط الشعر بعد التلوين.
+منتج الحنة الطبيعي يمنحك لونًا جذابًا ويغذي الشعر بدون أي ضرر أو مواد قاسية.
+</div>
+
 <div class="product">
-<p>
-تعاني سيدات كثيرات من تلف الشعر أو ظهور الشيب بسبب الصبغات الكيماوية.
-الحنة الطبيعية تمنحك لونًا صحيًا ولمعانًا بدون أي ضرر، ومعنا لا تقلقي من طريقة الاستخدام،
-فبعد الطلب سيتواصل معك مختص من فريقنا لشرح الطريقة خطوة بخطوة.
-</p>
 <img src="henna.jpg">
 <h4>حنة طبيعية للشعر</h4>
 <p>299 جنيه</p>
@@ -92,13 +68,12 @@ cursor:pointer
 </div>
 </div>
 
-<!-- المنتج الثاني -->
+<div class="problem">
+كثير من السيدات يحلمن بشعر أطول وأكثر كثافة لكن يعانين من بطء النمو والتقصف.
+كورس إطالة الشعر مصمم خصيصًا ليعالج المشكلة بخطوات سهلة ودعم من فريق متخصص بعد الشراء.
+</div>
+
 <div class="product">
-<p>
-كثير من السيدات يحلمن بشعر أطول وأكثر كثافة لكن يفشلن بسبب الطرق الخاطئة.
-كورس إطالة الشعر مصمم بخطوات عملية وآمنة،
-وبعد الشراء سيتواصل معك مختص من فريقنا لمتابعتك والإجابة على أي استفسار.
-</p>
 <img src="course.jpg">
 <h4>كورس إطالة الشعر</h4>
 <p>849 جنيه</p>
@@ -111,18 +86,17 @@ cursor:pointer
 
 <div class="summary" id="summary">لم يتم اختيار منتجات بعد</div>
 
-<button class="order-btn" onclick="goThankYou()">🌸 اطلبى الآن</button>
+<button class="order-btn" onclick="goThank()">🌸 تأكيد الطلب</button>
 
 </div>
 
 <script>
-let seconds = 3600;
+let seconds=3600;
 setInterval(()=>{
-let m = Math.floor(seconds/60);
-let s = seconds%60;
-document.getElementById('time').innerText =
-`${m}:${s<10?'0'+s:s}`;
-if(seconds>0) seconds--;
+let m=Math.floor(seconds/60);
+let s=seconds%60;
+document.getElementById('time').innerText=`${m}:${s<10?'0'+s:s}`;
+if(seconds>0)seconds--;
 },1000);
 
 let order={henna:0,course:0};
@@ -135,22 +109,16 @@ update();
 
 function update(){
 let txt='',total=0;
-if(order.henna){
-txt+=`حنة × ${order.henna} = ${order.henna*299}<br>`;
-total+=order.henna*299;
-}
-if(order.course){
-txt+=`كورس × ${order.course} = ${order.course*849}<br>`;
-total+=order.course*849;
-}
+if(order.henna){txt+=`حنة × ${order.henna} = ${order.henna*299}<br>`;total+=order.henna*299}
+if(order.course){txt+=`كورس × ${order.course} = ${order.course*849}<br>`;total+=order.course*849}
 if(!txt){txt='لم يتم اختيار منتجات بعد'}
 else{txt+=`<strong>الإجمالي: ${total} جنيه</strong>`}
 document.getElementById('summary').innerHTML=txt;
 localStorage.setItem('order',JSON.stringify(order));
 }
 
-function goThankYou(){
-location.href='thank-you.html';
+function goThank(){
+window.location.href='thank-you.html';
 }
 </script>
 
