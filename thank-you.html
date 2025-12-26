@@ -5,24 +5,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>تم تأكيد الطلب</title>
 
-<!-- Facebook Pixel -->
+<!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f.fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
 n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-
-fbq('init','710372971867762');
-fbq('track','PageView');
+fbq('init', 'PIXEL_ID_HERE');
+fbq('track', 'PageView');
+fbq('track', 'Purchase', {
+  value: 299,
+  currency: 'EGP'
+});
 </script>
+<!-- End Meta Pixel Code -->
 
 <style>
-body{font-family:tahoma;background:#f6e6f0;text-align:center}
-.box{max-width:420px;margin:80px auto;background:#fff;padding:20px;border-radius:12px}
+body{
+font-family:tahoma;
+background:#f6e6f0;
+margin:0;
+display:flex;
+align-items:center;
+justify-content:center;
+height:100vh
+}
+.box{
+background:#fff;
+padding:20px;
+border-radius:12px;
+max-width:420px;
+text-align:center
+}
 </style>
 </head>
 
@@ -30,21 +48,9 @@ body{font-family:tahoma;background:#f6e6f0;text-align:center}
 
 <div class="box">
 <h2>🎉 تم تأكيد طلبك بنجاح</h2>
-<p>سيتم التواصل معك لتأكيد الشحن</p>
+<p>سيتم التواصل معك خلال وقت قصير لتأكيد الطلب وشرح طريقة الاستخدام.</p>
+<p>شكراً لثقتك بنا 💜</p>
 </div>
-
-<script>
-setTimeout(function(){
-  let d = JSON.parse(localStorage.getItem('order_data'));
-  if(d){
-    fbq('track','Purchase',{
-      value: d.total,
-      currency: 'EGP'
-    });
-    localStorage.removeItem('order_data');
-  }
-}, 1200);
-</script>
 
 </body>
 </html>

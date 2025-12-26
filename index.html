@@ -5,13 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>عرض خاص</title>
 
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script>
-(function(){
-  emailjs.init("iTr8NlQ0dEyyrZzfa");
-})();
-</script>
-
 <style>
 body{font-family:tahoma;background:#f6e6f0;margin:0}
 .box{max-width:420px;margin:auto;background:#fff;padding:15px;border-radius:12px}
@@ -43,20 +36,18 @@ text-align:center
 
 img{max-width:100%;border-radius:10px}
 
-.qty button{width:40px;height:40px;font-size:20px}
-.qty span{margin:0 10px;font-size:18px}
+.qty button{
+width:40px;height:40px;font-size:20px
+}
+.qty span{
+margin:0 10px;font-size:18px
+}
 
 .summary{
 background:#f3d9f1;
 padding:10px;
 border-radius:8px;
 margin-top:10px
-}
-
-input{
-width:100%;
-padding:10px;
-margin-top:8px
 }
 
 .order-btn{
@@ -67,17 +58,7 @@ width:100%;
 padding:12px;
 font-size:18px;
 border-radius:8px;
-margin-top:10px
-}
-
-.text-box{
-background:#fdf4fb;
-border:1px solid #f1c6e6;
-padding:10px;
-border-radius:8px;
-margin-bottom:10px;
-font-size:14px;
-line-height:1.7
+cursor:pointer
 }
 </style>
 </head>
@@ -94,21 +75,13 @@ line-height:1.7
 <div>الدفع عند الاستلام</div>
 </div>
 
-<!-- نص الحنة -->
-<div class="text-box">
-🔴 <strong>مشكلة بتواجه ستات كتير مع صبغات الشعر</strong><br>
-أغلب الصبغات بتسبب جفاف، تقصّف، وهيشان مع الوقت،
-غير إن اللون ساعات بيطلع غير متوقع أو يبهت بسرعة.<br><br>
-
-🌿 <strong>الحنّة الطبيعية هي الحل الآمن</strong><br>
-بتلوّن الشعر بلون طبيعي جميل، وبتقوّي الشعر بدل ما تضرّه.<br><br>
-
-💬 <strong>متقلقيش من طريقة الاستخدام</strong><br>
-بعد توصيل الأوردر، حد متخصص من فريقنا هيتواصل معاكي
-ويشرحلك طريقة الاستعمال خطوة بخطوة + خدمة ما بعد البيع متوفرة.
-</div>
-
+<!-- المنتج الأول -->
 <div class="product">
+<p>
+تعاني سيدات كثيرات من تلف الشعر أو ظهور الشيب بسبب الصبغات الكيماوية.
+الحنة الطبيعية تمنحك لونًا صحيًا ولمعانًا بدون أي ضرر، ومعنا لا تقلقي من طريقة الاستخدام،
+فبعد الطلب سيتواصل معك مختص من فريقنا لشرح الطريقة خطوة بخطوة.
+</p>
 <img src="henna.jpg">
 <h4>حنة طبيعية للشعر</h4>
 <p>299 جنيه</p>
@@ -119,23 +92,13 @@ line-height:1.7
 </div>
 </div>
 
-<!-- نص كورس إطالة الشعر -->
-<div class="text-box">
-🔴 <strong>مشكلة بتعاني منها ستات كتير</strong><br>
-شعر بيطوّل ببطء، تساقط مستمر، وتجارب كتير من غير نتيجة.<br><br>
-
-✨ <strong>إطالة الشعر محتاجة طريقة صح</strong><br>
-مش منتج وخلاص، لكن روتين صحيح وفهم لطبيعة شعرك.<br><br>
-
-🎓 <strong>كورس إطالة الشعر معمول مخصوص</strong><br>
-خطوات واضحة ومجرّبة لإطالة وتقوية الشعر.<br><br>
-
-📞 <strong>دعم بعد الشراء</strong><br>
-حد من فريقنا هيتواصل معاكي بعد الشراء
-ويشرحلك طريقة التطبيق علشان توصلي لأفضل نتيجة.
-</div>
-
+<!-- المنتج الثاني -->
 <div class="product">
+<p>
+كثير من السيدات يحلمن بشعر أطول وأكثر كثافة لكن يفشلن بسبب الطرق الخاطئة.
+كورس إطالة الشعر مصمم بخطوات عملية وآمنة،
+وبعد الشراء سيتواصل معك مختص من فريقنا لمتابعتك والإجابة على أي استفسار.
+</p>
 <img src="course.jpg">
 <h4>كورس إطالة الشعر</h4>
 <p>849 جنيه</p>
@@ -148,21 +111,18 @@ line-height:1.7
 
 <div class="summary" id="summary">لم يتم اختيار منتجات بعد</div>
 
-<input id="name" placeholder="الاسم" required>
-<input id="phone" placeholder="رقم الموبايل" required>
-<input id="address" placeholder="العنوان" required>
-
-<button class="order-btn" onclick="sendOrder()">🌸 تأكيد الطلب</button>
+<button class="order-btn" onclick="goThankYou()">🌸 اطلبى الآن</button>
 
 </div>
 
 <script>
-let seconds=3600;
+let seconds = 3600;
 setInterval(()=>{
-let m=Math.floor(seconds/60);
-let s=seconds%60;
-document.getElementById('time').innerText=`${m}:${s<10?'0'+s:s}`;
-if(seconds>0)seconds--;
+let m = Math.floor(seconds/60);
+let s = seconds%60;
+document.getElementById('time').innerText =
+`${m}:${s<10?'0'+s:s}`;
+if(seconds>0) seconds--;
 },1000);
 
 let order={henna:0,course:0};
@@ -175,24 +135,22 @@ update();
 
 function update(){
 let txt='',total=0;
-if(order.henna){txt+=`حنة × ${order.henna} = ${order.henna*299}<br>`;total+=order.henna*299}
-if(order.course){txt+=`كورس × ${order.course} = ${order.course*849}<br>`;total+=order.course*849}
-txt = txt ? txt+`<strong>الإجمالي: ${total} جنيه</strong>` : 'لم يتم اختيار منتجات بعد';
+if(order.henna){
+txt+=`حنة × ${order.henna} = ${order.henna*299}<br>`;
+total+=order.henna*299;
+}
+if(order.course){
+txt+=`كورس × ${order.course} = ${order.course*849}<br>`;
+total+=order.course*849;
+}
+if(!txt){txt='لم يتم اختيار منتجات بعد'}
+else{txt+=`<strong>الإجمالي: ${total} جنيه</strong>`}
 document.getElementById('summary').innerHTML=txt;
-localStorage.setItem('order_data',JSON.stringify({order,total}));
+localStorage.setItem('order',JSON.stringify(order));
 }
 
-function sendOrder(){
-let data=JSON.parse(localStorage.getItem('order_data'));
-emailjs.send("service_64amdzf","template_m6e6601",{
-name:document.getElementById('name').value,
-phone:document.getElementById('phone').value,
-address:document.getElementById('address').value,
-order:data.order.henna+" حنة / "+data.order.course+" كورس",
-total:data.total
-}).then(()=>{
-location.href="thank-you.html";
-});
+function goThankYou(){
+location.href='thank-you.html';
 }
 </script>
 
